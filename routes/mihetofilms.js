@@ -5,6 +5,13 @@ const path = require('path');
 
 const router = express.Router();
 
+// Set Puppeteer cache directory for Render
+process.env.PUPPETEER_CACHE_DIR = '/opt/render/.cache/puppeteer';
+
+// Use persistent disk path for Render
+const mockMoviesPath = path.join('/opt/render/data', 'MockMovies.json');
+const outputFileName = path.join('/opt/render/data', 'FinallyMovies.json');
+
 // --- Helper Functions ---
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
