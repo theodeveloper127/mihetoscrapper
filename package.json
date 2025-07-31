@@ -1,7 +1,7 @@
 {
   "name": "puppeteer-scraper",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "centroller.js",
   "scripts": {
     "start": "node centroller.js",
     "scrapper": "nodemon centroller.js",
