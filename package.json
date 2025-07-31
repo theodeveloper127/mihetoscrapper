@@ -3,20 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "scrapper": "nodemon centroller.js"
+    "start": "node centroller.js",
+    "scrapper": "nodemon centroller.js",
+    "postinstall": "npx puppeteer browsers install chrome"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A Puppeteer-based web scraper for movie data",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "cheerio": "^1.1.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "mongoose": "^8.17.0",
     "puppeteer": "^24.15.0"
   },
   "devDependencies": {
