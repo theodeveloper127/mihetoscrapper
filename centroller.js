@@ -42,16 +42,18 @@ async function TheScrapperCallable(maxPages = 2) {
     }
 
     try {
+        console.log('[Phase 1] Launching Puppeteer with cache dir:', process.env.PUPPETEER_CACHE_DIR);
+        console.log('[Phase 1] Executable path:', process.env.PUPPETEER_EXECUTABLE_PATH || 'default');
         browser = await puppeteer.launch({
-            headless: 'new', // Use new headless mode for better compatibility
+            headless: 'new',
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage', // Reduce memory issues
-                '--disable-gpu', // Disable GPU for Render
-                '--single-process' // Optimize for containerized environments
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--single-process'
             ],
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-138.0.7204.168/chrome-linux64/chrome'
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH // Let Puppeteer find the binary
         });
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
@@ -145,6 +147,8 @@ async function scrapeMovieFullDetails(movieId) {
     let movieData = {};
 
     try {
+        console.log('[Phase 2] Launching Puppeteer with cache dir:', process.env.PUPPETEER_CACHE_DIR);
+        console.log('[Phase 2] Executable path:', process.env.PUPPETEER_EXECUTABLE_PATH || 'default');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -154,7 +158,7 @@ async function scrapeMovieFullDetails(movieId) {
                 '--disable-gpu',
                 '--single-process'
             ],
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-138.0.7204.168/chrome-linux64/chrome'
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH // Let Puppeteer find the binary
         });
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
