@@ -43,9 +43,15 @@ async function TheScrapperCallable(maxPages = 2) {
 
     try {
         browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined
+            headless: 'new', // Use new headless mode for better compatibility
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage', // Reduce memory issues
+                '--disable-gpu', // Disable GPU for Render
+                '--single-process' // Optimize for containerized environments
+            ],
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-138.0.7204.168/chrome-linux64/chrome'
         });
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
@@ -140,9 +146,15 @@ async function scrapeMovieFullDetails(movieId) {
 
     try {
         browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for Render
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined
+            headless: 'new',
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--single-process'
+            ],
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-138.0.7204.168/chrome-linux64/chrome'
         });
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
